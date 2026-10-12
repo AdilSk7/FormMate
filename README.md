@@ -154,9 +154,3 @@ You can test FormMate locally in under 60 seconds using the bundled `test-form.h
 8. Refresh `test-form.html` and click **Autofill Form** again to verify the night shifts question is now automatically filled!
 
 ---
-
-## 📌 Known Limitations (Version 1)
-
-- **Dynamic iframe forms**: Some cross-origin iframes embedded inside third-party job boards cannot be accessed due to browser security sandbox constraints.
-- **Complex Multi-Select Checkbox Grids**: Multiple checkboxes under complex matrix tables are left unmodified to avoid invalid submissions.
-- **Deterministic Text Matching**: Question similarity uses normalized token overlap and exact/substring matching. AI-based semantic paraphrase matching is intentionally reserved for future versions.
