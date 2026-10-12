@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FormMate – Smart Autofill</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <path d="m9 15 2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="header-titles">
+          <h1>FormMate</h1>
+          <p class="subtitle">Smart Form Autofill</p>
+        </div>
+      </div>
+      <div class="status-badge" id="appStatusBadge">
+        <span class="status-dot"></span>
+        <span class="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="autofill-tab" id="tabBtnAutofill">Autofill</button>
+      <button class="tab-btn" data-tab="mydata-tab" id="tabBtnMyData">My Data</button>
+      <button class="tab-btn" data-tab="questions-tab" id="tabBtnQuestions">Questions</button>
+      <button class="tab-btn" data-tab="settings-tab" id="tabBtnSettings">Settings</button>
+    </nav>
+
+    <!-- TAB 1: AUTOFILL FORM -->
+    <section class="tab-content active" id="autofill-tab">
+      <div class="autofill-hero">
+        <p class="section-desc">Instantly autofill job applications & Google Forms with your verified data.</p>
+        
+        <button class="primary-btn autofill-action-btn" id="btnRunAutofill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Autofill Form</span>
+        </button>
+
+        <div class="result-card hidden" id="autofillResultCard">
+          <div class="result-header">
+            <h4>Autofill Result</h4>
+            <span class="timestamp" id="resultTimestamp">Just now</span>
+          </div>
+          <div class="stats-list">
+            <div class="stat-item success">
+              <span class="stat-icon">✓</span>
+              <span id="statProfileFields">0 fields filled</span>
+            </div>
+            <div class="stat-item success">
+              <span class="stat-icon">✓</span>
+              <span id="statSavedQuestions">0 saved questions filled</span>
+            </div>
+            <div class="stat-item warning hidden" id="statNewQuestionsWrapper">
+              <span class="stat-icon">⚠</span>
+              <span id="statNewQuestions">0 new questions found</span>
+            </div>
+          </div>
+          <p class="result-note" id="resultNote">Review the form on page before manually submitting.</p>
+        </div>
+
+        <div class="security-banner">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Safe: Never auto-submits. Passwords & financial fields are strictly ignored.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MY DATA -->
+    <section class="tab-content" id="mydata-tab">
+      <form id="profileForm" class="form-container">
+        <p class="section-desc">Your personal details stored 100% locally on your machine.</p>
+
+        <div class="input-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="e.g. Adil Shaik" autocomplete="name">
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="e.g. example@gmail.com" autocomplete="email">
+        </div>
+
+        <div class="input-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" name="mobile" placeholder="e.g. 9876543210" autocomplete="tel">
+        </div>
+
+        <div class="input-group">
+          <label for="college">College Name</label>
+          <input type="text" id="college" name="college" placeholder="e.g. Indian Institute of Technology">
+        </div>
+
+        <div class="input-group">
+          <label for="department">Department / Branch</label>
+          <input type="text" id="department" name="department" placeholder="e.g. Computer Science">
+        </div>
+
+        <div class="input-group">
+          <label for="degree">Degree</label>
+          <input type="text" id="degree" name="degree" placeholder="e.g. B.Tech / B.E. / M.C.A">
+        </div>
+
+        <div class="input-group">
+          <label for="graduationYear">Year of Pass Out</label>
+          <input type="text" id="graduationYear" name="graduationYear" placeholder="e.g. 2024">
+        </div>
+
+        <div class="input-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g. Hyderabad / Bangalore">
+        </div>
+
+        <div class="input-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" placeholder="e.g. Karnataka / Telangana">
+        </div>
+
+        <div class="input-group">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" placeholder="e.g. India">
+        </div>
+
+        <!-- Custom User Fields Container -->
+        <div class="custom-fields-wrapper">
+          <div class="custom-fields-header">
+            <h4>Custom Profile Fields</h4>
+            <button type="button" class="btn-text" id="btnAddCustomField">+ Add Field</button>
+          </div>
+          <div id="customFieldsContainer" class="custom-fields-list"></div>
+        </div>
+
+        <div class="sticky-footer">
+          <button type="submit" class="primary-btn" id="btnSaveProfile">Save Data</button>
+          <span class="save-indicator" id="profileSaveIndicator"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- TAB 3: SAVED QUESTIONS -->
+    <section class="tab-content" id="questions-tab">
+      <div class="questions-container">
+        <!-- Add / Edit Form -->
+        <div class="add-question-card">
+          <h4 id="questionFormHeading">Add New Question</h4>
+          <input type="hidden" id="editQuestionId">
+          <div class="input-group">
+            <label for="inputQuestionText">Question</label>
+            <input type="text" id="inputQuestionText" placeholder="e.g. Are you willing to relocate?">
+          </div>
+          <div class="input-group">
+            <label for="inputQuestionAnswer">Answer</label>
+            <input type="text" id="inputQuestionAnswer" placeholder="e.g. Yes">
+          </div>
+          <div class="question-btn-row">
+            <button type="button" class="primary-btn" id="btnSaveQuestion">Save Question</button>
+            <button type="button" class="secondary-btn hidden" id="btnCancelEdit">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Filter & Count -->
+        <div class="questions-list-header">
+          <h4>Saved Questions (<span id="questionsCount">0</span>)</h4>
+          <input type="text" id="filterQuestionsInput" class="filter-input" placeholder="Search questions...">
+        </div>
+
+        <!-- List -->
+        <div class="questions-list" id="questionsList">
+          <!-- Populated by JavaScript -->
+          <div class="empty-state" id="emptyQuestionsState">
+            <p>No custom questions saved yet.</p>
+            <small>Add questions above or let FormMate discover them automatically on job forms!</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: BACKUP & SETTINGS -->
+    <section class="tab-content" id="settings-tab">
+      <div class="settings-container">
+        <div class="settings-group">
+          <h4>Data Management</h4>
+          <p class="section-desc">Keep your data portable and safe with local JSON backups.</p>
+
+          <button type="button" class="action-btn" id="btnExportData">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export Data (JSON)</span>
+          </button>
+
+          <div class="file-import-wrapper">
+            <input type="file" id="importFileInput" accept=".json" class="file-input-hidden">
+            <button type="button" class="action-btn" id="btnTriggerImport">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Import Data (JSON)</span>
+            </button>
+          </div>
+
+          <button type="button" class="danger-btn" id="btnClearAllData">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <span>Clear All Data</span>
+          </button>
+        </div>
+
+        <div class="settings-group">
+          <h4>Privacy & Local Storage</h4>
+          <p class="privacy-note">
+            FormMate is 100% offline and stores your data exclusively in your browser's <code>chrome.storage.local</code>. No analytics, no tracking, and zero external network requests.
+          </p>
+        </div>
+
+        <div class="settings-footer">
+          <span class="version-label">FormMate v1.0.0</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

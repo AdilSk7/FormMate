@@ -1,0 +1,51 @@
+====================================================
+FormMate: Google Forms Radio/Choice Verification
+====================================================
+
+--- TEST 1: Verify cleanQuestionText and Option Label Extraction ---
+Question 1 cleaned: "Are you interested in sales and Marketing?" == "Are you interested in sales and Marketing?" -> true
+Question 2 cleaned: "Are you planning to relocate Bangalore?" == "Are you planning to relocate Bangalore?" -> true
+✓ Test 1 passed: Trailing asterisks and question titles cleaned accurately.
+
+--- TEST 2: Google Forms Choice Autofill Execution ---
+Total radio groups identified: 2 (expected: 2)
+Matched Question: Are you interested in sales and Marketing? -> Answer: No
+  -> Selected option: No | aria-checked: true
+Matched Question: Are you planning to relocate Bangalore? -> Answer: No
+  -> Selected option: No | aria-checked: true
+
+Verification Question 1: "Are you interested in sales and Marketing?"
+ - "Yes" aria-checked: false (expected: "false")
+ - "No"  aria-checked: true (expected: "true")
+ - "No"  clicked: true (expected: true)
+✓ Question 1 correctly selected "No".
+
+Verification Question 2: "Are you planning to relocate Bangalore?"
+ - "Yes" aria-checked: false (expected: "false")
+ - "No"  aria-checked: true (expected: "true")
+ - "No"  clicked: true (expected: true)
+✓ Question 2 correctly selected "No".
+
+--- TEST 3: Case-insensitive & Whitespace Tolerance ---
+Total radio groups identified: 2 (expected: 2)
+Matched Question: Are you interested in sales and Marketing? -> Answer:  NO 
+  -> Selected option: No | aria-checked: true
+Matched Question: Are you planning to relocate Bangalore? -> Answer: no
+  -> Selected option: No | aria-checked: true
+Tolerance Q1 " NO " selected: true
+Tolerance Q2 "no"   selected: true
+✓ Test 3 passed: Whitespace and case variations handled properly.
+
+--- TEST 4: Simulate Form Reload and Re-fill ---
+Total radio groups identified: 2 (expected: 2)
+Matched Question: Are you interested in sales and Marketing? -> Answer: No
+  -> Selected option: No | aria-checked: true
+Matched Question: Are you planning to relocate Bangalore? -> Answer: No
+  -> Selected option: No | aria-checked: true
+Reloaded Q1 "No" re-selected: true
+Reloaded Q2 "No" re-selected: true
+✓ Test 4 passed: Form reload cleanly re-selected both "No" options from saved questions.
+
+====================================================
+ALL GOOGLE FORMS RADIO VERIFICATIONS PASSED SUCCESSFULLY!
+====================================================

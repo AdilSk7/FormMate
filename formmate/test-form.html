@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form – FormMate Test Page</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    header {
+      border-bottom: 2px solid #e0e7ff;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    h1 { font-size: 24px; color: var(--primary); margin-bottom: 6px; }
+    p.desc { font-size: 14px; color: #64748b; }
+    .form-section { margin-bottom: 24px; }
+    .section-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+    .field-group { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .radio-label, .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #334155;
+      cursor: pointer;
+    }
+    .radio-label input, .checkbox-label input { cursor: pointer; }
+    .sensitive-box {
+      background-color: #fff1f2;
+      border: 1px dashed #f43f5e;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .sensitive-box label { color: #9f1239; }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    button[type="submit"] {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button[type="reset"] {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #submitAlertBanner {
+      display: none;
+      background: #ef4444;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Campus Placement Application</h1>
+      <p class="desc">Official registration form for Graduate Engineering Trainee recruitment.</p>
+    </header>
+
+    <form id="jobApplicationForm">
+      <!-- Personal Details -->
+      <div class="form-section">
+        <h2 class="section-title">1. Candidate Information</h2>
+
+        <div class="field-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="applicant_name" placeholder="Enter your full name">
+        </div>
+
+        <div class="field-group">
+          <label for="email">Mail Id</label>
+          <input type="email" id="email" name="contact_email" placeholder="example@gmail.com">
+        </div>
+
+        <div class="field-group">
+          <label for="mobile">Mobile number</label>
+          <input type="tel" id="mobile" name="phone_number" placeholder="10-digit mobile number">
+        </div>
+
+        <div class="field-group">
+          <label for="college">College Name</label>
+          <input type="text" id="college" name="college_institution" placeholder="University / College name">
+        </div>
+
+        <div class="field-group">
+          <label for="department">Department</label>
+          <input type="text" id="department" name="stream_department" placeholder="e.g. Computer Science">
+        </div>
+
+        <div class="field-group">
+          <label for="degree">Degree</label>
+          <select id="degree" name="degree_qualification">
+            <option value="">-- Select Degree --</option>
+            <option value="B.Tech">B.Tech</option>
+            <option value="B.E.">B.E.</option>
+            <option value="B.Sc">B.Sc</option>
+            <option value="M.C.A">M.C.A</option>
+            <option value="M.Tech">M.Tech</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="passingYear">Year of pass out</label>
+          <input type="text" id="passingYear" name="graduation_batch" placeholder="e.g. 2024">
+        </div>
+
+        <div class="field-group">
+          <label for="city">Current City</label>
+          <input type="text" id="city" name="current_city" placeholder="e.g. Bangalore">
+        </div>
+      </div>
+
+      <!-- Multiple Choice / Radio Questions -->
+      <div class="form-section">
+        <h2 class="section-title">2. Role Suitability & Preferences</h2>
+
+        <div class="field-group">
+          <label>Are you interested in sales and Marketing?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="salesInterest" value="Yes">
+              <span>Yes</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="salesInterest" value="No">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Are you planning to relocate Bangalore?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="relocateBangalore" value="Yes">
+              <span>Yes</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="relocateBangalore" value="No">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Unknown Question to test in-page learning -->
+        <div class="field-group">
+          <label for="nightShifts">Are you comfortable working night shifts?</label>
+          <input type="text" id="nightShifts" name="night_shift_preference" placeholder="Your response...">
+        </div>
+      </div>
+
+      <!-- Sensitive Field - MUST BE UNTOUCHED -->
+      <div class="sensitive-box">
+        <label for="portalPassword">Portal Password (Sensitive - Should NEVER be touched by autofill)</label>
+        <input type="password" id="portalPassword" name="password" placeholder="••••••••">
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" id="btnSubmit">Submit Application</button>
+        <button type="reset" id="btnReset">Clear Form</button>
+      </div>
+
+      <div id="submitAlertBanner">⚠ WARNING: Form was submitted! (FormMate must NEVER trigger this)</div>
+    </form>
+  </div>
+
+  <script>
+    // Monitor submit event to verify FormMate never auto-submits
+    document.getElementById('jobApplicationForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const banner = document.getElementById('submitAlertBanner');
+      banner.style.display = 'block';
+      console.log('Form submission detected.');
+    });
+  </script>
+</body>
+</html>
