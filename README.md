@@ -1,4 +1,4 @@
-# FormMate – Smart Autofill (Version 1)
+# FormMate – Smart Autofill
 
 **FormMate** is a simple, reliable, and privacy-first browser extension for **Google Chrome** and **Microsoft Edge** (Manifest V3) designed to automatically autofill job application forms and Google Forms using your saved personal details and custom question/answer pairs.
 
